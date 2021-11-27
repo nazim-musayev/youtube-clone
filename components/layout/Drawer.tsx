@@ -27,13 +27,8 @@ const StyledStack = styled(Stack)({
    },
    '&::-webkit-scrollbar-thumb': {
      borderRadius: '5px',
-     display: 'none'
-   },
-   '&::-webkit-scrollbar-thumb:hover': {
-     borderRadius: '5px',
-     display: 'block',
      backgroundColor: '#868686',
-     marginTop: '20px'
+     marginTop: "20px"
    }
 });
 
@@ -62,7 +57,7 @@ const StyledList = styled(List)<{ component?: React.ElementType }>({
 
 interface Props {
   selected?: number
-}
+};
 
 const Drawer: React.FC<Props> = ({selected}) => {
   const [selectedNav, setSelectedNav] = useState<number>(selected!);

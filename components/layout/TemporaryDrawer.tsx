@@ -15,7 +15,9 @@ const TemporaryDrawer: React.FC = () => {
       <Stack direction='row' py={1} pl={2}>
         <DrawerIcon />
         <Link href='/' passHref>
-          <Stack direction='row' pt='4px' pl={2} sx={{cursor: 'pointer'}}>
+          <Stack direction='row' pt='4px' pl={2} sx={{cursor: 'pointer'}}
+           onClick={() => dispatch(toggleTemporary())}
+          >
             <YoutubeIcon />
           </Stack>
         </Link>

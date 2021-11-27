@@ -5,6 +5,7 @@ import { VideoCard, VideoWithStatistics, VideoWithoutStatistics, ChannelData } f
 import SearchPage from 'components/search';
 import Meta from 'components/Meta';
 
+
 export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const { query } = params!;
   const key = process.env.NEXT_PUBLIC_API_KEY;
@@ -42,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
       videosWithStatistics.push({
         duration: item.contentDetails.duration,
         viewCount: item.statistics.viewCount,
-        id: item.id
+        videoId: item.id
       })
     })
   };
@@ -61,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
 
   videosWithoutStatistics.map((item: VideoWithoutStatistics) => {
     videosWithStatistics.map((itemWithStatistics: VideoWithStatistics) => {
-      if(item.videoId === itemWithStatistics.id){
+      if(item.videoId === itemWithStatistics.videoId){
         avatars.map((itemWithAvatar: ChannelData) => {
           if(item.channelId === itemWithAvatar.id){
             finalData.push({

@@ -5,18 +5,6 @@ export interface Nav {
   badgeContent?: number
 };
 
-export interface SingleVideo {
-  publishedAt: string,
-  title: string,
-  description: string,
-  channelTitle: string,
-  channelId: string,
-  viewCount: string,
-  videoId: string,
-  likes: string,
-  dislikes: string
-};
-
 export interface VideoCard {
   publishedAt: string,
   title: string,
@@ -27,29 +15,8 @@ export interface VideoCard {
   thumbnail: string,
   videoId: string,
   avatarUrl?: string,
-  description?: string
-};
-
-export interface VideoWithoutStatistics {
-  publishedAt: string,
-  title: string,
-  channelTitle: string,
-  channelId: string,
-  thumbnail: string,
-  videoId: string,
-  description?: string
-};
-
-export interface VideoWithStatistics {
-  viewCount: string,
-  duration: string,
-  id: string
-};
-
-export interface Subscription {
-  title: string,
-  channelId: string,
-  avatarUrl: string
+  description?: string,
+  likes?: string
 };
 
 export interface Category {
@@ -75,3 +42,13 @@ export interface Comment {
   likes: number,
   publishedAt: string
 };
+
+export interface ArrowHandle {
+  down: (inputIsFocused: boolean) => void,
+  up: (inputIsFocused: boolean) => void
+};
+
+export type SingleVideo = Omit<VideoCard, "duration" | "thumbnail" | "avatarUrl">;
+export type VideoWithoutStatistics = Omit<VideoCard, "viewCount" | "duration" | "avatarUrl">;
+export type VideoWithStatistics = Pick<VideoCard, "viewCount" | "duration" | "videoId">;
+export type Subscription = Pick<VideoCard, "title" | "channelId" | "avatarUrl">;

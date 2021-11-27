@@ -40,31 +40,23 @@ const SubBar: React.FC = () => {
       title: 'Comedy'
     },
     {
+      id: 24,
+      title: 'Entertainment'
+    },
+    {
       id: 27,
       title: 'Education'
-    },
-    {
-      id: 30,
-      title: 'Movies'
-    },
-    {
-      id: 37,
-      title: 'Family'
-    },
-    {
-      id: 43,
-      title: 'Shows'
     }
   ];
  
   const handleClick = async (id: number) => {
-    const fetchingFromServer = id > 0 ? true : false;
-    if(selectedChip !== id){
-      dispatch(fetchVideosRequest(initialChip === 0 ? videos : videosFromCategories, fetchingFromServer, id));
-      if(id !== 0){
-        dispatch(await fetchVideosSuccess(id));
-      }
-    }
+    const fetchingFromServer = id > 0;
+    
+    if(selectedChip === id) return;
+    dispatch(fetchVideosRequest(initialChip === 0 ? videos : videosFromCategories, fetchingFromServer, id));
+
+    if(id === 0) return;
+    dispatch(await fetchVideosSuccess(id));
   };
 
   return (

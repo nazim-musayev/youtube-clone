@@ -30,8 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
         viewCount: item.statistics.viewCount,
         description: item.snippet.description,
         videoId: item.id,
-        likes: item.statistics.likeCount,
-        dislikes: item.statistics.dislikeCount
+        likes: item.statistics.likeCount
       }
   };
 
@@ -88,14 +87,14 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
       relatedWithStats.push({
         duration: item.contentDetails.duration,
         viewCount: item.statistics.viewCount,
-        id: item.id
+        videoId: item.id
       })
     });
   };
 
   relatedWithoutStats.map((item: VideoWithoutStatistics) => {
     relatedWithStats.map((itemWithStatistics: VideoWithStatistics) => {
-      if(item.videoId === itemWithStatistics.id){
+      if(item.videoId === itemWithStatistics.videoId){
         relatedVideos.push({
           publishedAt: item.publishedAt,
           channelId: item.channelId,

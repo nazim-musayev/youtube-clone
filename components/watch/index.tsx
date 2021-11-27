@@ -25,7 +25,6 @@ interface Props {
 
 interface State {
   likeCount: any,
-  dislikeCount: any,
   subs: any,
   views: number | string
 };
@@ -36,28 +35,25 @@ const VideoPage: React.FC<Props> = ({data}) => {
   const share: string = 'M15,5.63L20.66,12L15,18.37V15v-1h-1c-3.96,0-7.14,1-9.75,3.09c1.84-4.07,5.11-6.4,9.89-7.1L15,9.86V9V5.63 M14,3v6 C6.22,10.13,3.11,15.33,2,21c2.78-3.97,6.44-6,12-6v6l8-9L14,3L14,3z';
   const save: string = 'M22,13h-4v4h-2v-4h-4v-2h4V7h2v4h4V13z M14,7H2v1h12V7z M2,12h8v-1H2V12z M2,16h8v-1H2V16z';  
   const threeDot: string = 'M7.5,12c0,0.83-0.67,1.5-1.5,1.5S4.5,12.83,4.5,12s0.67-1.5,1.5-1.5S7.5,11.17,7.5,12z M12,10.5c-0.83,0-1.5,0.67-1.5,1.5 s0.67,1.5,1.5,1.5s1.5-0.67,1.5-1.5S12.83,10.5,12,10.5z M18,10.5c-0.83,0-1.5,0.67-1.5,1.5s0.67,1.5,1.5,1.5s1.5-0.67,1.5-1.5 S18.83,10.5,18,10.5z';
-  const { title, videoId, viewCount, publishedAt, likes, dislikes, channelTitle, description } = data.video;
+  const { title, videoId, viewCount, publishedAt, likes, channelTitle, description } = data.video;
   const { avatarUrl, subscribers } = data.channelData;
   const [state, setState] = useState<State>({
     likeCount: '',
-    dislikeCount: '',
     subs: '',
     views: ''
   });
-  const { likeCount, dislikeCount, subs, views } = state;
+  const { likeCount, subs, views } = state;
 
   useEffect(() => {
-    const parsedLikes = parseInt(likes);
-    const parsedDislikes = parseInt(dislikes);
+    const parsedLikes = parseInt(likes!);
     const parsedSubs = parseInt(subscribers!);
     
     setState({
       likeCount: parsedLikes < 1e3 ? parsedLikes : (parsedLikes >= 1e3 && parsedLikes < 1e6) ? `${(parsedLikes / 1e3).toFixed(1)}K` : `${(parsedLikes / 1e6).toFixed(1)}M`,
-      dislikeCount: parsedDislikes < 1e3 ? parsedDislikes : (parsedDislikes >= 1e3 && parsedDislikes < 1e6) ? `${(parsedDislikes / 1e3).toFixed(1)}K` : `${(parsedDislikes / 1e6).toFixed(1)}M`,
       subs: parsedSubs < 1e3 ? parsedSubs : (parsedSubs >= 1e3 && parsedSubs < 1e6) ? `${(parsedSubs / 1e3).toFixed(1)}K` : `${(parsedSubs / 1e6).toFixed(1)}M`,
       views: parseInt(viewCount!).toLocaleString()
     });
-  }, [likes, dislikes, subscribers, viewCount]);
+  }, [likes, subscribers, viewCount]);
 
   return (
     <Grid container height='auto' mb={2}>
@@ -80,7 +76,7 @@ const VideoPage: React.FC<Props> = ({data}) => {
              {likeCount}
             </Button>
             <Button startIcon={<Svg d={dislike} />} size='large'>
-            {dislikeCount}
+              Dislike
             </Button>
           </Stack>
           <Button startIcon={<Svg d={share} />} size='large'>

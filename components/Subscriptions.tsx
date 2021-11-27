@@ -53,7 +53,7 @@ const Subscriptions: React.FC = () => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Avatar avatarUrl={avatarUrl} width={24} height={24} /> 
+                <Avatar avatarUrl={avatarUrl!} width={24} height={24} /> 
               </ListItemIcon>
               <ListItemText primary={title.length > 18 ? (`${title.slice(0,15)}...`) : title } />
             </ListItemButton>
